@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: install git on all nodes
+      apt:
+        name: git
+        state: present
+  tasks:
+    - name: install maven on all nodes
+      apt:
+        name: maven
+        state: present
