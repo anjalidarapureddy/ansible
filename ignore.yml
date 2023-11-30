@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install git
+    apt:
+      name: git
+
+  - name: install maven
+    apt:
+      namea: maven
+    ignore_errors: yes
+
+  - name: install java
+    apt:
+      name: default-jdk
