@@ -1,0 +1,59 @@
+. launch an ubuntu instance
+      become a root user- sudo -i
+      install packages-  apt update -y
+. install mysql into the server
+      sudo apt install mysql-server
+      check the status- sudo service mysql status
+      network status of the network- sudo ss -tap | grep mysql
+. configure MYSQL
+      cd /etc/mysql/mysql.conf.d
+      vim mysqld.cnf 
+      change the bindaddress as ur network ip/ 0.0.0.0
+      daemon will be restarted-  sudo systemctl restart mysql.service
+. Login to the sql 
+      mysql -u root -p
+      create a database- create database <name>;
+      use <name>;
+      create table <tablename> ( column1 datatype, column2 d.t2, column3 d.t3);
+      insert into <tablename> values (value of column1, val of col2, val of col3);
+      exit
+      for mysqldump-  mysqldump --all-databases --routines -u root -p > ~/fulldump.sql
+      backup-  sudo rsync -avz /etc/mysql /root/mysql-backup
+      sudo rm -rf /var/lib/mysql/*
+      sudo mysqld --initialize
+      sudo chown -R mysql: /var/lib/mysql
+      sudo service mysql start
+. install aws-cli and configure
+      sudo snap install aws-cli --classic
+      aws --version
+      aws configure
+. create a s3 bucket
+. install ansible
+      apt install pipx
+      apt install ansible-core
+      ansible --version
+      create a passwd for vault-  openssl rand -base64 2048 > vault.pass
+      ansible-vault create group_vars/all/pass.yml --vault-password-file vault.pass ---enter the password eg:(password: anjali)
+. write a playbook.yaml
+      ---
+      - name: First playbook
+        hosts: localhost
+        tasks:
+        - name: Take backup
+          shell: mysqldump -u root --password="{{mysql_passwd}}" db_name table_name > /tmp/dump3.sql
+        - name: Push to s3
+          shell: aws s3 cp /tmp/dump3.sql s3://sql-backupfile
+
+      command to run playbook- ansible-playbook playbook.yaml --vault-password-file vault.pass
+--------------------------------------------------success--------------------------------------------------------
+
+
+    
+
+
+
+
+
+
+      
+      
