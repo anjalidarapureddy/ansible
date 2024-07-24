@@ -53,6 +53,39 @@
 
 
 
+aws storage services
+. ELASTIC FILE SYSTEM(EFS)
+It is used to share the file to multiple servers by mounting the efs to the servers
+. FIRST create virtual servers   one is ubuntu and otherone is amazon linux
+. SECOND create a security group and edit inbound rules add rule as NFS to the private ip address for the  both ec2 instances.
+. Third Create a efs file as custom and attach the mount using ip address
+now open the amazon server in that , we mount the file system to the webserver for that we install httpd , to enable httpd- chkconfig httpd on
+and copy the mounting command which is available in efs
+And repeat the same procedure in ubuntu server but here we add one more command is sudo apt install nfs-common
+and mount the command
+Create a file anyone of the server that can be displayed in other connecting servers also.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       
